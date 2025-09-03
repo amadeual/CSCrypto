@@ -244,7 +244,7 @@ export function SwapInterface({ onSwap }: SwapInterfaceProps) {
                 <span className="text-emerald-400">~0.1%</span>
               </div>
               <div className="flex justify-between text-gray-300">
-                <span>Network Fee</span>
+                <span>Service Fee</span>
                 <span>~$2.50</span>
               </div>
             </div>
