@@ -262,12 +262,12 @@ function App() {
 
           <div className="flex flex-col lg:flex-row gap-8 items-start">
             {/* Main Swap Interface */}
-            <div className="flex-1 flex justify-center">
+            <div className="flex-1 flex justify-center relative z-50">
               <SwapInterface onSwap={handleSwap} />
             </div>
 
             {/* Side Panel */}
-            <div className="w-full lg:w-96 space-y-6">
+            <div className="w-full lg:w-96 space-y-6 relative z-20">
               <NetworkStatus networks={networkStatus} />
               
               {/* Quick Stats */}

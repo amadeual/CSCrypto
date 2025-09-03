@@ -99,7 +99,7 @@ export function TransactionTracker({ transactions }: TransactionTrackerProps) {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto mt-8">
+    <div className="w-full max-w-2xl mx-auto mt-8 relative z-10">
       <div className="bg-gray-900/70 backdrop-blur-lg border border-gray-700/50 rounded-2xl p-6">
         <h3 className="text-xl font-bold text-white mb-6">Track Your Transaction</h3>
         

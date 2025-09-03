@@ -107,7 +107,7 @@ export function TokenSelector({ selectedToken, onSelectToken, excludeToken, labe
 
       {/* Token Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-gray-800/95 backdrop-blur-lg border border-gray-700/50 rounded-xl shadow-2xl z-[10000] max-h-80 overflow-hidden">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-gray-800/95 backdrop-blur-lg border border-gray-700/50 rounded-xl shadow-2xl z-[99999] max-h-80 overflow-hidden">
           {/* Search */}
           <div className="p-4 border-b border-gray-700/50">
             <div className="relative">
