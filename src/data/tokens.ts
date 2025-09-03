@@ -103,7 +103,7 @@ const FALLBACK_TOKENS: Token[] = [
     address: '0x6982508145454Ce325dDbE47a25d4ec3d2311933',
     decimals: 18,
     logoUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/24478.png',
-    minimumSwap: 1000000
+    minimumSwap: 20000000
   },
   {
     symbol: 'USDC',

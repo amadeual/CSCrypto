@@ -54,6 +54,13 @@ export function SwapInterface({ onSwap }: SwapInterfaceProps) {
     if (toToken?.symbol === 'LUIGI' && fromToken && !['USDT', 'USDT.z', 'TETRA'].includes(fromToken.symbol)) {
       return;
     }
+    // Prevent swapping if PEPE is paired with non-USDT token
+    if (fromToken?.symbol === 'PEPE' && toToken && !['USDT', 'USDT.z', 'TETRA'].includes(toToken.symbol)) {
+      return;
+    }
+    if (toToken?.symbol === 'PEPE' && fromToken && !['USDT', 'USDT.z', 'TETRA'].includes(fromToken.symbol)) {
+      return;
+    }
     
     const tempToken = fromToken;
     const tempAmount = fromAmount;
@@ -89,6 +96,12 @@ export function SwapInterface({ onSwap }: SwapInterfaceProps) {
       return ['USDT', 'USDT.z', 'TETRA'].includes(toToken.symbol);
     }
     if (toToken.symbol === 'LUIGI') {
+      return ['USDT', 'USDT.z', 'TETRA'].includes(fromToken.symbol);
+    }
+    if (fromToken.symbol === 'PEPE') {
+      return ['USDT', 'USDT.z', 'TETRA'].includes(toToken.symbol);
+    }
+    if (toToken.symbol === 'PEPE') {
       return ['USDT', 'USDT.z', 'TETRA'].includes(fromToken.symbol);
     }
     return true;
@@ -286,7 +299,7 @@ export function SwapInterface({ onSwap }: SwapInterfaceProps) {
           {!fromToken || !toToken ? 'Select Tokens' : 
            !fromAmount ? 'Enter Amount' : 
            !validation.isValid ? 'Invalid Amount' : 
-           !isValidLuigiPair() ? 'LUIGI can only be swapped with USDT' : 
+           !isValidLuigiPair() ? (fromToken?.symbol === 'LUIGI' || toToken?.symbol === 'LUIGI' ? 'LUIGI can only be swapped with USDT' : 'PEPE can only be swapped with USDT') : 
            'Swap Tokens'}
         </button>
       </div>

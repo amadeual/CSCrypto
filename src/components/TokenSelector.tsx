@@ -80,11 +80,19 @@ export function TokenSelector({ selectedToken, onSelectToken, excludeToken, labe
      if (excludeToken?.symbol === 'LUIGI') {
        return token.symbol === 'USDT' || token.symbol === 'USDT.z' || token.symbol === 'TETRA';
      }
+    // If PEPE is selected as the other token, only show USDT variants
+    if (excludeToken?.symbol === 'PEPE') {
+      return token.symbol === 'USDT' || token.symbol === 'USDT.z' || token.symbol === 'TETRA';
+    }
      // If selecting a token and LUIGI is available, only allow USDT variants to pair with LUIGI
      if (token.symbol === 'LUIGI') {
        return excludeToken?.symbol === 'USDT' || excludeToken?.symbol === 'USDT.z' || excludeToken?.symbol === 'TETRA' || !excludeToken;
      }
-     // Allow all other tokens to be visible (including PEPE)
+    // If selecting PEPE, only allow USDT variants to pair with it
+    if (token.symbol === 'PEPE') {
+      return excludeToken?.symbol === 'USDT' || excludeToken?.symbol === 'USDT.z' || excludeToken?.symbol === 'TETRA' || !excludeToken;
+    }
+    // Allow all other tokens to be visible
      return true;
    });
 
