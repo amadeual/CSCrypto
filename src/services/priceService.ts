@@ -23,9 +23,14 @@ class PriceService {
     'SOL': 'solana',
     'BNB': 'binancecoin',
     'USDT': 'tether',
-    'USDT.z': 'tether', // Assuming USDT.z tracks USDT price
-    'TETRA': 'tether', // Assuming Tetra USD tracks USDT price
-    'LUIGI': 'solana' // Placeholder - using SOL price as fallback
+    'USDT.z': 'tether',
+    'TETRA': 'tether'
+    // LUIGI has custom pricing - see getPrice method
+  };
+
+  // Custom token prices that don't use CoinGecko
+  private readonly CUSTOM_PRICES: { [symbol: string]: number } = {
+    'LUIGI': 0.002017 // 1 LUIGI = 0.002017 USDT (updated daily)
   };
 
   private isCacheValid(symbol: string): boolean {
@@ -38,6 +43,17 @@ class PriceService {
     // Check cache first
     if (this.isCacheValid(symbol)) {
       return this.cache[symbol].price;
+    }
+
+    // Check for custom prices first
+    if (this.CUSTOM_PRICES[symbol]) {
+      const price = this.CUSTOM_PRICES[symbol];
+      // Cache the custom price
+      this.cache[symbol] = {
+        price,
+        timestamp: Date.now()
+      };
+      return price;
     }
 
     try {
@@ -90,7 +106,7 @@ class PriceService {
       'USDT': 1,
       'USDT.z': 1,
       'TETRA': 1,
-      'LUIGI': 0.001
+      'LUIGI': 0.002017
     };
 
     return fallbackPrices[symbol] || 1;
@@ -98,6 +114,19 @@ class PriceService {
 
   async getExchangeRate(fromSymbol: string, toSymbol: string): Promise<number> {
     try {
+      // Special handling for LUIGI conversions to ensure accuracy
+      if (fromSymbol === 'LUIGI' || toSymbol === 'LUIGI') {
+        const luigiPrice = this.CUSTOM_PRICES['LUIGI'] || 0.002017;
+        
+        if (fromSymbol === 'LUIGI') {
+          const toPrice = await this.getPrice(toSymbol);
+          return luigiPrice / toPrice;
+        } else {
+          const fromPrice = await this.getPrice(fromSymbol);
+          return fromPrice / luigiPrice;
+        }
+      }
+
       const [fromPrice, toPrice] = await Promise.all([
         this.getPrice(fromSymbol),
         this.getPrice(toSymbol)
@@ -113,6 +142,14 @@ class PriceService {
   // Clear cache manually if needed
   clearCache(): void {
     this.cache = {};
+  }
+
+  // Update LUIGI price (for admin use)
+  updateLuigiPrice(newPrice: number): void {
+    this.CUSTOM_PRICES['LUIGI'] = newPrice;
+    // Clear LUIGI from cache to force refresh
+    delete this.cache['LUIGI'];
+    console.log(`LUIGI price updated to ${newPrice} USDT`);
   }
 }
 
