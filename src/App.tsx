@@ -12,6 +12,7 @@ import { ExchangeProcessingModal } from './components/ExchangeProcessingModal';
 import { Transaction, SwapQuote, WalletState } from './types';
 import { databaseService } from './services/databaseService';
 import { refreshTokens } from './data/tokens';
+import { statisticsService } from './utils/statistics';
 
 // Generate unique tracker ID
 const generateTrackerId = (): string => {
@@ -36,6 +37,7 @@ function App() {
   const [showProcessingModal, setShowProcessingModal] = useState(false);
   const [pendingQuote, setPendingQuote] = useState<SwapQuote | null>(null);
   const [currentTransaction, setCurrentTransaction] = useState<Transaction | null>(null);
+  const [statistics, setStatistics] = useState(statisticsService.getStatistics());
 
   // Load transactions on component mount
   useEffect(() => {
@@ -55,6 +57,21 @@ function App() {
 
     loadTransactions();
   }, [walletState.address]);
+
+  // Update statistics periodically
+  useEffect(() => {
+    const updateStats = () => {
+      setStatistics(statisticsService.getStatistics());
+    };
+
+    // Update immediately
+    updateStats();
+
+    // Set up interval to check for updates every minute
+    const interval = setInterval(updateStats, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const networkStatus = [
     { name: 'Ethereum', status: 'online' as const, blockHeight: 18750234 },
@@ -259,15 +276,15 @@ function App() {
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-slate-400">Total Volume</span>
-                    <span className="text-white font-semibold">$24.8M</span>
+                    <span className="text-white font-semibold">{statisticsService.formatVolume(statistics.totalVolume)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Total Swaps</span>
-                    <span className="text-white font-semibold">12,847</span>
+                    <span className="text-white font-semibold">{statisticsService.formatNumber(statistics.totalSwaps)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Avg. Swap Size</span>
-                    <span className="text-white font-semibold">$1,928</span>
+                    <span className="text-white font-semibold">{statisticsService.formatCurrency(statistics.avgSwapSize)}</span>
                   </div>
                 </div>
               </div>
