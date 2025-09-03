@@ -270,7 +270,7 @@ class DatabaseService {
         symbol: 'LUIGI',
         name: 'Luigi Mangione',
         network: 'Solana',
-        address: '0x123...',
+        address: 'DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK',
         decimals: 18,
         logoUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
         minimumSwap: 100000
@@ -279,7 +279,7 @@ class DatabaseService {
         symbol: 'USDT.z',
         name: 'USDT.z',
         network: 'BEP20',
-        address: '0x456...',
+        address: '0x55d398326f99059fF775485246999027B3197955',
         decimals: 6,
         logoUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png',
         minimumSwap: 12000
@@ -288,7 +288,7 @@ class DatabaseService {
         symbol: 'ETH',
         name: 'Ethereum',
         network: 'ERC20',
-        address: '0x000...',
+        address: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
         decimals: 18,
         logoUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png',
         minimumSwap: 0.05

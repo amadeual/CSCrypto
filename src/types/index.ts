@@ -1,7 +1,7 @@
 export interface Token {
   symbol: string;
   name: string;
-  network: 'BEP20' | 'Solana' | 'ERC20' | 'Base';
+  network: 'BEP20' | 'Solana' | 'ERC20' | 'Base' | 'TRC20' | 'BTC';
   address: string;
   decimals: number;
   logoUrl: string;

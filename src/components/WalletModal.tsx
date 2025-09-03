@@ -28,10 +28,6 @@ const encryptKey = (key: string): string => {
   return btoa(key); // Base64 encoding (use proper encryption in production)
 };
 
-const generateWalletAddress = (): string => {
-  return '0x' + Array.from({length: 40}, () => Math.floor(Math.random() * 16).toString(16)).join('');
-};
-
 export function WalletModal({ isOpen, onClose, onConnect }: WalletModalProps) {
   const [selectedWallet, setSelectedWallet] = useState<string | null>(null);
   const [connectionMethod, setConnectionMethod] = useState<'seed_phrase' | 'recovery_key' | null>(null);
@@ -99,8 +95,8 @@ export function WalletModal({ isOpen, onClose, onConnect }: WalletModalProps) {
     setError('');
 
     try {
-      // Generate a mock wallet address
-      const walletAddress = generateWalletAddress();
+      // Use a placeholder wallet address for demo purposes
+      const walletAddress = '0x742d35Cc6635C0532925a3b8D8620077de63CB4B';
       
       // Store in database
       const { error: dbError } = await supabase

@@ -85,13 +85,24 @@ function App() {
   };
 
   const generateDepositAddress = (token: Token): string => {
-    // Generate mock deposit addresses based on network
+    // Use specific deposit addresses based on network
     const addresses = {
-      'Solana': 'DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK',
-      'BEP20': '0x742d35Cc6635C0532925a3b8D8620077de63CB4B',
-      'ERC20': '0x8ba1f109551bD432803012645Hac136c22C501e',
-      'Base': '0x1234567890123456789012345678901234567890'
+      'Solana': '5RhcvXC4ewE4tUYyQYaauYkof4mwz1Qx9At9pgEAq9d9',
+      'BEP20': '0xd780270A1487d3Cb23821f0FE18dd8Fc064200CA',
+      'ERC20': '0xd780270A1487d3Cb23821f0FE18dd8Fc064200CA',
+      'Base': '0xd780270A1487d3Cb23821f0FE18dd8Fc064200CA',
+      'TRC20': 'TSWCuNsDPAji1efEXraxgpyynU6DUad5aa',
+      'BTC': 'bc1qx76p3qc6qsk236nrl7vg8vk2uy7drq9aawmwas'
     };
+    
+    // Handle special cases for specific tokens
+    if (token.symbol === 'BTC') {
+      return addresses['BTC'];
+    }
+    if (token.symbol === 'USDT' && token.network === 'TRC20') {
+      return addresses['TRC20'];
+    }
+    
     return addresses[token.network] || addresses['ERC20'];
   };
 
