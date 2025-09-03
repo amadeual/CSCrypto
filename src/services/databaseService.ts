@@ -272,7 +272,7 @@ class DatabaseService {
         network: 'Solana',
         address: 'DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK',
         decimals: 18,
-        logoUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
+        logoUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/33830.png',
         minimumSwap: 100000
       },
       {
