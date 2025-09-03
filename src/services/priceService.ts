@@ -24,7 +24,8 @@ class PriceService {
     'BNB': 'binancecoin',
     'USDT': 'tether',
     'USDT.z': 'tether',
-    'TETRA': 'tether'
+    'TETRA': 'tether',
+    'PEPE': 'pepe'
     // LUIGI has custom pricing - see getPrice method
   };
 
@@ -106,7 +107,8 @@ class PriceService {
       'USDT': 1,
       'USDT.z': 1,
       'TETRA': 1,
-      'LUIGI': 0.002017
+      'LUIGI': 0.002017,
+      'PEPE': 0.000001
     };
 
     return fallbackPrices[symbol] || 1;
