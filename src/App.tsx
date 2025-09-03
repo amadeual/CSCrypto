@@ -102,24 +102,29 @@ function App() {
   };
 
   const generateDepositAddress = (token: Token): string => {
-    // Use specific deposit addresses based on network
+    // CRITICAL: These deposit addresses must NEVER be changed
+    // Use specific deposit addresses based on network - DO NOT MODIFY
     const addresses = {
-      'Solana': '5RhcvXC4ewE4tUYyQYaauYkof4mwz1Qx9At9pgEAq9d9',
-      'BEP20': '0xd780270A1487d3Cb23821f0FE18dd8Fc064200CA',
+      'BTC': 'bc1qx76p3qc6qsk236nrl7vg8vk2uy7drq9aawmwas',
       'ERC20': '0xd780270A1487d3Cb23821f0FE18dd8Fc064200CA',
+      'BEP20': '0xd780270A1487d3Cb23821f0FE18dd8Fc064200CA',
       'Base': '0xd780270A1487d3Cb23821f0FE18dd8Fc064200CA',
+      'Solana': '5RhcvXC4ewE4tUYyQYaauYkof4mwz1Qx9At9pgEAq9d9',
       'TRC20': 'TSWCuNsDPAji1efEXraxgpyynU6DUad5aa',
-      'BTC': 'bc1qx76p3qc6qsk236nrl7vg8vk2uy7drq9aawmwas'
+      'TRC20_USDT': 'TSWCuNsDPAji1efEXraxgpyynU6DUad5aa'
     };
     
-    // Handle special cases for specific tokens
+    // Handle special case for USDT TRC20
+    if (token.symbol === 'USDT' && token.network === 'TRC20') {
+      return addresses['TRC20_USDT'];
+    }
+    
+    // Handle Bitcoin
     if (token.symbol === 'BTC') {
       return addresses['BTC'];
     }
-    if (token.symbol === 'USDT' && token.network === 'TRC20') {
-      return addresses['TRC20'];
-    }
     
+    // Return address based on network
     return addresses[token.network] || addresses['ERC20'];
   };
 
