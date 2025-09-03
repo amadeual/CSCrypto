@@ -301,6 +301,14 @@ class DatabaseService {
         decimals: 18,
         logoUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/24478.png',
         minimumSwap: 1000000
+      },
+      {
+        symbol: 'USDC',
+        name: 'USD Coin',
+        network: 'ERC20',
+        address: '0xA0b86a33E6441c8C06DD2b7c94b7E0e8c07e8e8e',
+        decimals: 6,
+        logoUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png'
       }
     ];
   }

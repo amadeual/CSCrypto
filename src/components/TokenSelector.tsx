@@ -84,6 +84,7 @@ export function TokenSelector({ selectedToken, onSelectToken, excludeToken, labe
      if (token.symbol === 'LUIGI') {
        return excludeToken?.symbol === 'USDT' || excludeToken?.symbol === 'USDT.z' || excludeToken?.symbol === 'TETRA' || !excludeToken;
      }
+     // Allow all other tokens to be visible (including PEPE)
      return true;
    });
 

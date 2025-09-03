@@ -25,7 +25,8 @@ class PriceService {
     'USDT': 'tether',
     'USDT.z': 'tether',
     'TETRA': 'tether',
-    'PEPE': 'pepe'
+    'PEPE': 'pepe',
+    'USDC': 'usd-coin'
     // LUIGI has custom pricing - see getPrice method
   };
 
@@ -108,7 +109,8 @@ class PriceService {
       'USDT.z': 1,
       'TETRA': 1,
       'LUIGI': 0.002017,
-      'PEPE': 0.000001
+      'PEPE': 0.000001,
+      'USDC': 1
     };
 
     return fallbackPrices[symbol] || 1;
