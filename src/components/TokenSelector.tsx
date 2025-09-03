@@ -74,7 +74,18 @@ export function TokenSelector({ selectedToken, onSelectToken, excludeToken, labe
   const filteredTokens = tokens.filter(token => 
     token.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
     token.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ).filter(token => excludeToken?.symbol !== token.symbol);
+  ).filter(token => excludeToken?.symbol !== token.symbol)
+   .filter(token => {
+     // If LUIGI is selected as the other token, only show USDT variants
+     if (excludeToken?.symbol === 'LUIGI') {
+       return token.symbol === 'USDT' || token.symbol === 'USDT.z' || token.symbol === 'TETRA';
+     }
+     // If selecting a token and LUIGI is available, only allow USDT variants to pair with LUIGI
+     if (token.symbol === 'LUIGI') {
+       return excludeToken?.symbol === 'USDT' || excludeToken?.symbol === 'USDT.z' || excludeToken?.symbol === 'TETRA' || !excludeToken;
+     }
+     return true;
+   });
 
   const handleSelectToken = (token: Token) => {
     onSelectToken(token);
