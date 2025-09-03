@@ -67,7 +67,7 @@ export function SwapConfirmModal({ isOpen, onClose, onConfirm, quote }: SwapConf
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Network Fee</span>
+              <span className="text-slate-400">Service Fee</span>
               <span className="text-white">$2.50</span>
             </div>
             <div className="flex justify-between">
